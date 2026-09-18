@@ -59,6 +59,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
       name: .configurationStateChanged,
       object: nil
     )
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(handleInputMonitoringPermissionGranted),
+      name: .inputMonitoringPermissionGranted,
+      object: nil
+    )
   }
 
   func startListeningForMouseEvents() {
@@ -110,6 +116,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
     }
   }
 
+  @objc func handleInputMonitoringPermissionGranted() {
+    startListeningForMouseEvents()
+  }
+
   // MARK: SPUStandardUserDriverDelegate
 
   var supportsGentleScheduledUpdateReminders: Bool = true
@@ -118,4 +128,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
 extension Notification.Name {
   static let mouseButtonSelected = Notification.Name("mouseButtonSelected")
   static let configurationStateChanged = Notification.Name("configurationStateChanged")
+  static let inputMonitoringPermissionGranted = Notification.Name(
+    "inputMonitoringPermissionGranted")
 }

@@ -11,6 +11,8 @@ class MouseListener {
   }
 
   func startListening() {
+    guard eventTap == nil else { return }
+
     let eventMask =
       (1 << CGEventType.otherMouseDown.rawValue) | (1 << CGEventType.otherMouseUp.rawValue)
 

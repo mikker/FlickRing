@@ -6,6 +6,7 @@ import SwiftUI
 
 struct GeneralPane: View {
   @State private var isListening = false
+  @State private var hasInputMonitoringPermission = CGPreflightListenEventAccess()
   @Default(.selectedMouseButton) private var selectedMouseButton
 
   @Default(.upAction) private var upAction
@@ -32,6 +33,18 @@ struct GeneralPane: View {
           TextField("", text: .constant(buttonName(for: selectedMouseButton)))
             .disabled(true)
             .frame(maxWidth: .infinity, alignment: .leading)
+        }
+
+        if !hasInputMonitoringPermission {
+          HStack {
+            Label("Input Monitoring is required to detect mouse buttons.", systemImage: "exclamationmark.triangle")
+              .foregroundStyle(.secondary)
+            Spacer()
+            Button("Enable") {
+              CGRequestListenEventAccess()
+              refreshInputMonitoringPermission()
+            }
+          }
         }
       }
 
@@ -75,6 +88,10 @@ struct GeneralPane: View {
     }
     .onAppear {
       setupKeyboardMonitor()
+      refreshInputMonitoringPermission()
+    }
+    .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+      refreshInputMonitoringPermission()
     }
     .onReceive(NotificationCenter.default.publisher(for: .mouseButtonSelected)) { notification in
       if let buttonNumber = notification.object as? Int, buttonNumber >= 2 {
@@ -82,6 +99,15 @@ struct GeneralPane: View {
         isListening = false
         NotificationCenter.default.post(name: .configurationStateChanged, object: false)
       }
+    }
+  }
+
+  private func refreshInputMonitoringPermission() {
+    let wasGranted = hasInputMonitoringPermission
+    hasInputMonitoringPermission = CGPreflightListenEventAccess()
+
+    if hasInputMonitoringPermission && !wasGranted {
+      NotificationCenter.default.post(name: .inputMonitoringPermissionGranted, object: nil)
     }
   }
 
