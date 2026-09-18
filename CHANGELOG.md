@@ -1,3 +1,7 @@
+## 1.3.3 (146)
+
+- Guide users to enable Input Monitoring
+
 # Changelog
 
 ## 1.3.2 (144)

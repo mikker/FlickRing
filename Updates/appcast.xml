@@ -3,13 +3,13 @@
 <channel>
 <title>FlickRing</title>
 <item>
-<title>1.3.2</title>
-<pubDate>Fri, 04 Sep 2026 13:37:55 +0000</pubDate>
+<title>1.3.3</title>
+<pubDate>Fri, 18 Sep 2026 21:54:15 +0000</pubDate>
 <sparkle:minimumSystemVersion>14.5</sparkle:minimumSystemVersion>
-<enclosure url="https://github.com/mikker/FlickRing/releases/download/v1.3.2/FlickRing.app.zip" sparkle:version="144" sparkle:shortVersionString="1.3.2" length="2125806" type="application/octet-stream" sparkle:edSignature="6cOhHLV2qy1yTz8OvO9W+OM/HdQObzhqiFNYc5WedUiFPAP5HrqzdgOGG50Y+YRBkqvQlO5k4Xj9eZc02NKhDg=="/>
+<enclosure url="https://github.com/mikker/FlickRing/releases/download/v1.3.3/FlickRing.app.zip" sparkle:version="146" sparkle:shortVersionString="1.3.3" length="2130662" type="application/octet-stream" sparkle:edSignature="h7YP/ZvXy9OAg0zz0ltUVFZnIwvoQue7vAHipjQy9numA66Vffj9Yve7LUfFvN+PK64sQMHBQ4nJilOm2xBuDQ=="/>
 <description><![CDATA[
 <ul>
-<li>Darker hover highlight when using clear glass</li>
+<li>Guide users to enable Input Monitoring</li>
 </ul>
 ]]></description>
 </item>
